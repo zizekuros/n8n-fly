@@ -1,12 +1,6 @@
 FROM docker.n8n.io/n8nio/n8n:latest
 
-USER root
-
-# Create directory and set permissions
-RUN mkdir -p /data/n8n && \
-    chown -R node:node /data
-
-# Switch back to node user
+# Switch to node user
 USER node
 
 # Copy the environment configuration

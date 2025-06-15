@@ -4,9 +4,8 @@ This repository contains configuration for deploying n8n workflow automation too
 
 ## Overview
 
-- Deploys n8n with persistent volume storage
+- Deploys n8n with persistent volume storage (both in Fra region)
 - Uses SQLite database (stored on volume)
-- Single volume mount with subdirectories for data and files
 - Automatic HTTPS/SSL certificate management
 - Custom domain support (default: `<app-name>.fly.dev`)
 - Secure encryption key management using Fly.io secrets
@@ -62,7 +61,7 @@ This repository contains configuration for deploying n8n workflow automation too
    
    Create a single volume with 1GB size.
    ```bash
-   fly volumes create n8n_data --size 1 --app $APP_NAME
+   fly volumes create n8n_data --size 1 --region fra --app $APP_NAME
    ```
 
 4. **Set Up Encryption Key**
@@ -78,7 +77,7 @@ This repository contains configuration for deploying n8n workflow automation too
 
 5. **Deploy application**
    ```bash
-   fly deploy --app $APP_NAME
+   fly deploy --app $APP_NAME --no-cache
    ```
 
 6. **Add Custom Domain** (Optional)
@@ -105,45 +104,17 @@ fly scale count 1 --app $APP_NAME
 ### Restart Application
 Re-deploy after changing the configuration.
 ```bash
-fly deploy --app $APP_NAME
+fly deploy --app $APP_NAME --no-cache
 ```
 
 ### Destroy All Resources
 ```bash
-fly destroy $APP_NAME
-```
-
-## Monitoring
-
-### View logs
-```bash
-fly logs --app $APP_NAME
-```
-### Check status
-```bash
-fly status --app $APP_NAME
-```
-### Access console
-```bash
-fly console --app $APP_NAME
-```
-### Check Mounted Volume Contents
-```bash
-# Connect to the machine
-fly ssh console --app $APP_NAME
-
-# Once connected, check the mounted volume contents
-ls -la /data
-ls -la /data/n8n
-ls -la /data/files
+fly apps destroy $APP_NAME
 ```
 
 ## Notes
 
 - This setup uses a Fly.io machine with 512MB RAM and 1 shared CPU
-- Single volume (1GB) with subdirectories for:
-  - `/data/n8n`: n8n configuration and SQLite database
-  - `/data/files`: Shared files storage
 - Your n8n instance will be available at `${APP_NAME}.fly.dev` by default
 - For higher workloads, consider using PostgreSQL instead of SQLite
 - Backup your volume regularly as it contains all your workflows and data

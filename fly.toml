@@ -6,7 +6,7 @@ primary_region = 'fra'
 
 [[mounts]]
   source = 'n8n_data'
-  destination = '/data'
+  destination = '/home/node/.n8n'
 
 [http_service]
   internal_port = 5678
@@ -16,9 +16,14 @@ primary_region = 'fra'
   min_machines_running = 1
   processes = ['app']
 
+[http_service.concurrency]
+  hard_limit = 25
+  soft_limit = 20
+  type = "connections"
+
 [[services]]
   protocol = ''
-  internal_port = 0
+  internal_port = 5678
 
   [[services.ports]]
     port = 443
