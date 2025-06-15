@@ -2,6 +2,16 @@
 
 This repository contains configuration for deploying n8n workflow automation tool on Fly.io using persistent volume storage. The setup uses SQLite with mounted volumes for data storage, which is suitable for personal or small team use. For production workloads with multiple instances or higher concurrency, using PostgreSQL is recommended.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Deployment Steps](#deployment-steps)
+- [Security Note](#security-note)
+- [Management Commands](#management-commands)
+- [Notes](#notes)
+- [Support](#support)
+
 ## Overview
 
 - Deploys n8n with persistent volume storage (both in Fra region)
@@ -81,8 +91,24 @@ This repository contains configuration for deploying n8n workflow automation too
    ```
 
 6. **Add Custom Domain** (Optional)
+   
+   Create a certificate for your custom domain:
    ```bash
-   fly domains add $N8N_HOST --app $APP_NAME
+   fly certs add $N8N_HOST --app $APP_NAME
+   ```
+   
+   Follow the DNS validation instructions displayed in the Fly.io dashboard under **Certificates** to configure your DNS records (A/AAAA or CNAME).
+   
+   Update your `.env` file to set `N8N_HOST`, `N8N_EDITOR_BASE_URL` and `WEEBHOOK_URL` to your custom domain (not the default `.fly.dev` domain), for example:
+   ```bash
+   N8N_HOST=https://your-domain.com
+   N8N_EDITOR_BASE_URL=https://your-domain.com
+   WEBHOOK_URL=https://your-domain.com
+   ```
+   
+   Re-deploy the application to apply the changes:
+   ```bash
+   fly deploy --app $APP_NAME --no-cache
    ```
 
 ## Security Note
@@ -118,6 +144,7 @@ fly apps destroy $APP_NAME
 - Your n8n instance will be available at `${APP_NAME}.fly.dev` by default
 - For higher workloads, consider using PostgreSQL instead of SQLite
 - Backup your volume regularly as it contains all your workflows and data
+- **⚠️ Running this setup will incur Fly.io costs** - monitor your usage and consider pausing when not needed
 
 ## Support
 
