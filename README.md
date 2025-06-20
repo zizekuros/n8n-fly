@@ -8,7 +8,7 @@ This repository contains configuration for deploying n8n workflow automation too
 - [Prerequisites](#prerequisites)
 - [Deployment Steps](#deployment-steps)
 - [Security Note](#security-note)
-- [Management Commands](#management-commands)
+- [Updating the Application](#updating-the-application)
 - [Notes](#notes)
 - [Support](#support)
 
@@ -115,29 +115,34 @@ This repository contains configuration for deploying n8n workflow automation too
 
 The `N8N_ENCRYPTION_KEY` is required to encrypt sensitive workflow data. It's managed through Fly.io secrets and automatically made available to n8n - you don't need to add it to the `.env` file.
 
-## Management Commands
+## Updating the Application
 
-### Pause Application
-```bash
-fly scale count 0 --app $APP_NAME
-```
+**⚠️ Important**: n8n does not update automatically. To get the latest version, you must redeploy your application.
 
-### Resume Application
-```bash
-fly scale count 1 --app $APP_NAME
-```
+### GitHub Actions Deployment (Recommended)
 
-### Restart Application
-Re-deploy after changing the configuration.
+1. **Create Fly.io API token**:
+   ```bash
+   fly tokens create deploy
+   ```
+   Copy the generated token.
+
+2. **Set up repository secrets** in your GitHub repository (**Settings** → **Secrets and variables** → **Actions**):
+
+   - `FLY_API_TOKEN` - Your Fly.io API token (from step 1)
+   - `FLY_APP_NAME` - Your application name (e.g., "my-n8n-app") 
+   - `FLY_APP_ENV` - Your complete `.env` file content
+
+3. **Deploy manually**:
+   
+   Go to **Actions** tab in your GitHub repository, select **Fly Deploy** workflow, and click **Run workflow**.
+
+### Manual Deployment
+
+Update to the latest n8n version and redeploy:
 ```bash
 fly deploy --app $APP_NAME --no-cache
 ```
-
-### Destroy All Resources
-```bash
-fly apps destroy $APP_NAME
-```
-
 ## Notes
 
 - This setup uses a Fly.io machine with 512MB RAM and 1 shared CPU
