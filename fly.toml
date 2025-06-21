@@ -6,7 +6,7 @@ primary_region = 'fra'
 
 [[mounts]]
   source = 'n8n_data'
-  destination = '/home/node/.n8n'
+  destination = '/home/node/data'
 
 [http_service]
   internal_port = 5678

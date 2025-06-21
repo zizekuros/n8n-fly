@@ -84,7 +84,7 @@ This repository contains configuration for deploying n8n workflow automation too
    fly secrets set N8N_EMAIL_MODE="smtp" --app $APP_NAME
    fly secrets set EXECUTIONS_DATA_PRUNE="true" --app $APP_NAME
    fly secrets set EXECUTIONS_DATA_MAX_AGE="336" --app $APP_NAME
-   fly secrets set N8N_USER_FOLDER="/home/node/.n8n" --app $APP_NAME
+   fly secrets set N8N_USER_FOLDER="/home/node/data" --app $APP_NAME
    fly secrets set N8N_RUNNERS_ENABLED="true" --app $APP_NAME
    fly secrets set N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true" --app $APP_NAME
    ```
