@@ -1,8 +1,8 @@
 FROM docker.n8n.io/n8nio/n8n:latest
 
-# Copy entrypoint script
+# Copy entrypoint script and set permissions as root
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh && chown node:node /entrypoint.sh
 
 # Switch to node user
 USER node
