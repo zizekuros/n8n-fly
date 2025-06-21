@@ -131,6 +131,18 @@ This repository contains configuration for deploying n8n workflow automation too
    
    Go to **Actions** tab in your GitHub repository, select **Fly Deploy** workflow, and click **Run workflow**.
 
+4. **Automatic scheduled deployment**:
+
+   Add following code to .github/workflow to enable automatic daily deployment for instance:
+   ```bash
+   name: Deploy n8n
+      on:
+      workflow_dispatch:
+      schedule:
+         # Daily at 2 AM UTC
+         - cron: '0 2 * * *'
+   ```
+
 ### Manual Deployment
 
 Update to the latest n8n version and redeploy:

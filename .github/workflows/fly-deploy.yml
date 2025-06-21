@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   schedule:
     # Runs every 3 minutes (for testing)
-    - cron: '*/5 * * * *'
+    - cron: '* * * * *'
 jobs:
   deploy:
     name: Deploy app
