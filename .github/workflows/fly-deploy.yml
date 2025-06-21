@@ -1,9 +1,9 @@
 name: Deploy n8n
 on:
-  workflow_dispatch:
+  #workflow_dispatch:
   schedule:
     # Runs every 10 minutes (for testing)
-    - cron: '*/10 * * * *'
+    - cron: '*/15 * * * *'
 jobs:
   deploy:
     name: Deploy app
