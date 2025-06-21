@@ -73,7 +73,7 @@ This repository contains configuration for deploying n8n workflow automation too
 
 5. **Set Environment Variables**
 
-   Configure n8n environment variables (replace with your actual values):
+   Configure n8n environment variables, for example (replace with your actual values):
    ```bash
    fly secrets set N8N_HOST="https://$APP_NAME.fly.dev" --app $APP_NAME
    fly secrets set N8N_EDITOR_BASE_URL="https://$APP_NAME.fly.dev" --app $APP_NAME
@@ -103,7 +103,7 @@ This repository contains configuration for deploying n8n workflow automation too
    
    Follow the DNS validation instructions displayed in the Fly.io dashboard under **Certificates** to configure your DNS records (A/AAAA or CNAME).
 
-   Make sure to upload N8N_HOST, WEBHOOK_URL, N8N_EDITOR_BASE_URL values too.
+   Make sure to update N8N_HOST, WEBHOOK_URL, N8N_EDITOR_BASE_URL env/secret values too.
    
    Lastly, re-deploy the application to apply the changes:
    ```bash

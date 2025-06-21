@@ -1,7 +1,15 @@
-FROM docker.n8n.io/n8nio/n8n:1.97.1
+FROM docker.n8n.io/n8nio/n8n:latest
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Switch to node user
 USER node
 
 # The n8n image comes with everything we need
-# Environment variables will be set via Fly.io 
+# Environment variables will be set via Fly.io
+
+# Use custom entrypoint to capture env vars at runtime
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["n8n"] 
