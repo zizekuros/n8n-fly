@@ -7,7 +7,6 @@ This repository contains configuration for deploying n8n workflow automation too
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Deployment Steps](#deployment-steps)
-- [Security Note](#security-note)
 - [Updating the Application](#updating-the-application)
 - [Notes](#notes)
 - [Support](#support)
@@ -42,22 +41,9 @@ This repository contains configuration for deploying n8n workflow automation too
    git clone https://github.com/zizekuros/n8n-fly
    cd n8n-fly
    ```
-   
-   Copy example environment file.
-   ```bash
-   cp example.env .env
-   ```
-   Edit .env file to set your application name. Replace ${APP_NAME} with your desired name (e.g., "my-n8n-app")
-   ```bash
-   nano .env
-   ```   
    Set the APP_NAME variable in your shell.
    ```bash
    export APP_NAME="your-n8n-app-name"
-   ```
-   Load all environment variables.
-   ```bash
-   source .env
    ```
 
 2. **Create Application**
@@ -85,35 +71,45 @@ This repository contains configuration for deploying n8n workflow automation too
    fly secrets set N8N_ENCRYPTION_KEY="$ENCRYPTION_KEY" --app $APP_NAME
    ```
 
-5. **Deploy application**
+5. **Set Environment Variables**
+
+   Configure n8n environment variables (replace with your actual values):
+   ```bash
+   fly secrets set N8N_HOST="https://$APP_NAME.fly.dev" --app $APP_NAME
+   fly secrets set N8N_EDITOR_BASE_URL="https://$APP_NAME.fly.dev" --app $APP_NAME
+   fly secrets set WEBHOOK_URL="https://$APP_NAME.fly.dev" --app $APP_NAME
+   fly secrets set N8N_PROTOCOL="https" --app $APP_NAME
+   fly secrets set N8N_PORT="5678" --app $APP_NAME
+   fly secrets set GENERIC_TIMEZONE="UTC" --app $APP_NAME
+   fly secrets set N8N_EMAIL_MODE="smtp" --app $APP_NAME
+   fly secrets set EXECUTIONS_DATA_PRUNE="true" --app $APP_NAME
+   fly secrets set EXECUTIONS_DATA_MAX_AGE="336" --app $APP_NAME
+   fly secrets set N8N_USER_FOLDER="/home/node/.n8n" --app $APP_NAME
+   fly secrets set N8N_RUNNERS_ENABLED="true" --app $APP_NAME
+   fly secrets set N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true" --app $APP_NAME
+   ```
+
+6. **Deploy application**
    ```bash
    fly deploy --app $APP_NAME --no-cache
    ```
 
-6. **Add Custom Domain** (Optional)
+7. **Add Custom Domain** (Optional)
    
    Create a certificate for your custom domain:
    ```bash
-   fly certs add $N8N_HOST --app $APP_NAME
+   fly certs add {CUSTOM-DOMAIN} --app $APP_NAME
    ```
    
    Follow the DNS validation instructions displayed in the Fly.io dashboard under **Certificates** to configure your DNS records (A/AAAA or CNAME).
+
+   Make sure to upload N8N_HOST, WEBHOOK_URL, N8N_EDITOR_BASE_URL values too.
    
-   Update your `.env` file to set `N8N_HOST`, `N8N_EDITOR_BASE_URL` and `WEEBHOOK_URL` to your custom domain (not the default `.fly.dev` domain), for example:
-   ```bash
-   N8N_HOST=https://your-domain.com
-   N8N_EDITOR_BASE_URL=https://your-domain.com
-   WEBHOOK_URL=https://your-domain.com
-   ```
-   
-   Re-deploy the application to apply the changes:
+   Lastly, re-deploy the application to apply the changes:
+
    ```bash
    fly deploy --app $APP_NAME --no-cache
    ```
-
-## Security Note
-
-The `N8N_ENCRYPTION_KEY` is required to encrypt sensitive workflow data. It's managed through Fly.io secrets and automatically made available to n8n - you don't need to add it to the `.env` file.
 
 ## Updating the Application
 
@@ -130,8 +126,7 @@ The `N8N_ENCRYPTION_KEY` is required to encrypt sensitive workflow data. It's ma
 2. **Set up repository secrets** in your GitHub repository (**Settings** → **Secrets and variables** → **Actions**):
 
    - `FLY_API_TOKEN` - Your Fly.io API token (from step 1)
-   - `FLY_APP_NAME` - Your application name (e.g., "my-n8n-app") 
-   - `FLY_APP_ENV` - Your complete `.env` file content
+   - `FLY_APP_NAME` - Your application name (e.g., "my-n8n-app")
 
 3. **Deploy manually**:
    
