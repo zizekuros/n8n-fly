@@ -106,7 +106,6 @@ This repository contains configuration for deploying n8n workflow automation too
    Make sure to upload N8N_HOST, WEBHOOK_URL, N8N_EDITOR_BASE_URL values too.
    
    Lastly, re-deploy the application to apply the changes:
-
    ```bash
    fly deploy --app $APP_NAME --no-cache
    ```
@@ -140,11 +139,8 @@ fly deploy --app $APP_NAME --no-cache
 ```
 ## Notes
 
-- This setup uses a Fly.io machine with 512MB RAM and 1 shared CPU
-- Your n8n instance will be available at `${APP_NAME}.fly.dev` by default
-- For higher workloads, consider using PostgreSQL instead of SQLite
 - Backup your volume regularly as it contains all your workflows and data
-- **⚠️ Running this setup will incur Fly.io costs** - monitor your usage and consider pausing when not needed
+- **⚠️ Running this setup will incur Fly.io costs** - monitor your usage and consider pausing when not needed. This setup uses a Fly.io machine with 512MB RAM and 1 shared CPU
 
 ## Support
 
