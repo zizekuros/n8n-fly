@@ -2,8 +2,8 @@
 
 General info:
 ```
-URL: {URL} 
-APP_NAME: {APP_NAME}
+URL={URL} 
+APP_NAME={APP_NAME}
 ```
 
 N8N configuration:
