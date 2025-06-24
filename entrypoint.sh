@@ -18,5 +18,8 @@ fi
 # Set proper ownership for .n8n directory only (not lost+found)
 chown -R node:node /home/node/data/.n8n
 
+# Also ensure node user can create directories in /home/node/data (for .cache, etc.)
+chown node:node /home/node/data
+
 # Switch to node user and start n8n using su
 exec su node -c "$*"
