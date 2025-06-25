@@ -1,24 +1,22 @@
 #!/bin/sh
 
-# Create backup directory as root (skip lost+found)
+# Create backup directory
 mkdir -p /home/node/data/backup/env
+chown -R node:node /home/node/data/backup
 
-# Create timestamped .env backup at runtime when Fly.io env vars are available
+# Current timestamp
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-printenv > /home/node/data/backup/env/${TIMESTAMP}.backup.env
 
-# Cleanup old backups - keep only the 10 most recent
+# ENV backup
+printenv > /home/node/data/backup/env/${TIMESTAMP}.backup.env
 BACKUP_DIR="/home/node/data/backup/env"
 BACKUP_COUNT=$(ls -1 ${BACKUP_DIR}/*.backup.env 2>/dev/null | wc -l)
 if [ "$BACKUP_COUNT" -gt 10 ]; then
-    # List all backup files, sort them (oldest first), and delete all but the last 10
     ls -1 ${BACKUP_DIR}/*.backup.env 2>/dev/null | sort | head -n $((BACKUP_COUNT - 10)) | xargs rm -f
 fi
 
 # Set proper ownership for .n8n directory only (not lost+found)
 chown -R node:node /home/node/data/.n8n
-
-# Also ensure node user can create directories in /home/node/data (for .cache, etc.)
 chown node:node /home/node/data
 
 # Switch to node user and start n8n using su
