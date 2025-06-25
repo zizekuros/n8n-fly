@@ -2,8 +2,8 @@
 
 # Backup configuration flags
 BACKUP_ENV=true
-BACKUP_CREDENTIALS=false
-BACKUP_WORKFLOWS=false
+BACKUP_CREDENTIALS=true
+BACKUP_WORKFLOWS=true
 
 # Create backup directories
 mkdir -p /home/node/data/backup/env
@@ -24,6 +24,9 @@ if [ "$BACKUP_ENV" = "true" ]; then
         ls -1 ${BACKUP_DIR}/*.backup.env 2>/dev/null | sort | head -n $((BACKUP_COUNT - 10)) | xargs rm -f
     fi
 fi
+
+# Remove unused .n8n directory (we use /home/node/data/.n8n instead)
+rm -rf /home/node/.n8n
 
 # Set proper ownership for .n8n directory only (not lost+found)
 chown -R node:node /home/node/data/.n8n

@@ -76,18 +76,24 @@ This repository contains configuration for deploying n8n workflow automation too
 
    Configure n8n environment variables, for example (replace with your actual values):
    ```bash
-   fly secrets set N8N_HOST="https://$APP_NAME.fly.dev" --app $APP_NAME
-   fly secrets set N8N_EDITOR_BASE_URL="https://$APP_NAME.fly.dev" --app $APP_NAME
-   fly secrets set WEBHOOK_URL="https://$APP_NAME.fly.dev" --app $APP_NAME
-   fly secrets set N8N_PROTOCOL="https" --app $APP_NAME
-   fly secrets set N8N_PORT="5678" --app $APP_NAME
-   fly secrets set GENERIC_TIMEZONE="UTC" --app $APP_NAME
-   fly secrets set N8N_EMAIL_MODE="smtp" --app $APP_NAME
-   fly secrets set EXECUTIONS_DATA_PRUNE="true" --app $APP_NAME
-   fly secrets set EXECUTIONS_DATA_MAX_AGE="336" --app $APP_NAME
-   fly secrets set N8N_USER_FOLDER="/home/node/data" --app $APP_NAME
-   fly secrets set N8N_RUNNERS_ENABLED="true" --app $APP_NAME
-   fly secrets set N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true" --app $APP_NAME
+   fly secrets set \
+     N8N_HOST="https://$APP_NAME.fly.dev" \
+     N8N_EDITOR_BASE_URL="https://$APP_NAME.fly.dev" \
+     WEBHOOK_URL="https://$APP_NAME.fly.dev" \
+     N8N_PROTOCOL="https" \
+     N8N_PORT="5678" \
+     GENERIC_TIMEZONE="UTC" \
+     N8N_EMAIL_MODE="smtp" \
+     N8N_USER_FOLDER="/home/node/data" \
+     N8N_RUNNERS_ENABLED="true" \
+     N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true" \
+     EXECUTIONS_DATA_PRUNE="true" \
+     EXECUTIONS_DATA_MAX_AGE="168" \
+     EXECUTIONS_DATA_PRUNE_MAX_COUNT="1000" \
+     EXECUTIONS_DATA_SAVE_ON_SUCCESS="none" \
+     EXECUTIONS_DATA_SAVE_ON_ERROR="all" \
+     EXECUTIONS_DATA_SAVE_ON_PROGRESS="false" \
+     --app $APP_NAME
    ```
 
 6. **Deploy application**
