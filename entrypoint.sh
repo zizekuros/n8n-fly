@@ -2,8 +2,8 @@
 
 # Backup configuration flags
 BACKUP_ENV=true
-BACKUP_CREDENTIALS=true
-BACKUP_WORKFLOWS=true
+BACKUP_CREDENTIALS=false
+BACKUP_WORKFLOWS=false
 
 # Create backup directories
 mkdir -p /home/node/data/backup/env
