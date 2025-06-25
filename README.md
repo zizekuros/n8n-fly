@@ -18,6 +18,7 @@ This repository contains configuration for deploying n8n workflow automation too
 - Automatic HTTPS/SSL certificate management
 - Custom domain support (default: `<app-name>.fly.dev`)
 - Secure encryption key management using Fly.io secrets
+- Backuping of workflows and credentials
 
 ## Prerequisites
 
