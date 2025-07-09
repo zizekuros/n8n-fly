@@ -159,7 +159,7 @@ fly deploy --app $APP_NAME --no-cache
 ## Notes
 
 - Backup your volume regularly as it contains all your workflows and data
-- **⚠️ Running this setup will incur Fly.io costs** - monitor your usage and consider pausing when not needed. This setup uses a Fly.io machine with 512MB RAM and 1 shared CPU
+- **⚠️ Running this setup will incur Fly.io costs** - monitor your usage and consider pausing when not needed.
 
 ## Support
 
