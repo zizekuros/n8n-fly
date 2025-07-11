@@ -9,4 +9,4 @@ This repository contains the configuration for running a self-hosted n8n instanc
 
 ## Contact
 
-For any inquiries regarding workflows, please contact zizek.uros@gmail.com.
+For any inquiries regarding workflows, feel free to contact me.
