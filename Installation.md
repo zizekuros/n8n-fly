@@ -125,7 +125,7 @@ This repository contains configuration for deploying n8n workflow automation too
 
 1. **Create Fly.io API token**:
    ```bash
-   fly tokens create deploy
+   fly tokens create deploy --app $APP_NAME
    ```
    Copy the generated token.
 
