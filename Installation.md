@@ -157,6 +157,19 @@ Update to the latest n8n version and redeploy:
 ```bash
 fly deploy --app $APP_NAME --no-cache
 ```
+
+### Scaling Apps
+
+Scale your app down to 0 replicas to stop all machines and save costs:
+```bash
+fly scale count 0 --app $APP_NAME
+```
+
+Scale back up to 1 replica when you need to use n8n:
+```bash
+fly scale count 1 --app $APP_NAME
+```
+
 ## Notes
 
 - Backup your volume regularly as it contains all your workflows and data
