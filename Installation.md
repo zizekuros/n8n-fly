@@ -93,6 +93,7 @@ This repository contains configuration for deploying n8n workflow automation too
      EXECUTIONS_DATA_SAVE_ON_SUCCESS="none" \
      EXECUTIONS_DATA_SAVE_ON_ERROR="all" \
      EXECUTIONS_DATA_SAVE_ON_PROGRESS="false" \
+     N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE="true" \
      --app $APP_NAME
    ```
 
