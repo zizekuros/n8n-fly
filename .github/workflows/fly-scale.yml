@@ -1,0 +1,18 @@
+name: Scale n8n App
+on:
+  workflow_dispatch:
+    inputs:
+      machine_count:
+        description: 'Number of machines to scale to (0 to stop, 1+ to run)'
+        required: true
+        type: string
+jobs:
+  scale:
+    name: Scale app to ${{ inputs.machine_count }} machines
+    runs-on: ubuntu-latest
+    concurrency: scale-group    # ensure only one scaling action runs at a time
+    steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl scale count ${{ inputs.machine_count }} --app ${{ secrets.FLY_APP_NAME }}
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
