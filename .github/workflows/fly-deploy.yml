@@ -1,9 +1,9 @@
 name: Deploy n8n
 on:
   workflow_dispatch:
-  #schedule:
+  schedule:
     # Runs daily at 02:37 AM UTC
-    #- cron: '37 2 * * *'
+    - cron: '37 2 * * *'
 jobs:
   deploy:
     name: Deploy app
