@@ -8,6 +8,7 @@ jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     concurrency: deploy-group    # ensure only one action runs at a time
     steps:
       - uses: actions/checkout@v4

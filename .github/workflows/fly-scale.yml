@@ -10,6 +10,7 @@ jobs:
   scale:
     name: Scale app to ${{ inputs.machine_count }} machines
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     concurrency: scale-group    # ensure only one scaling action runs at a time
     steps:
       - uses: superfly/flyctl-actions/setup-flyctl@master
