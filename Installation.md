@@ -88,12 +88,16 @@ This repository contains configuration for deploying n8n workflow automation too
      N8N_RUNNERS_ENABLED="true" \
      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS="true" \
      EXECUTIONS_DATA_PRUNE="true" \
-     EXECUTIONS_DATA_MAX_AGE="168" \
-     EXECUTIONS_DATA_PRUNE_MAX_COUNT="1000" \
+     EXECUTIONS_DATA_MAX_AGE="72" \
+     EXECUTIONS_DATA_PRUNE_MAX_COUNT="500" \
      EXECUTIONS_DATA_SAVE_ON_SUCCESS="none" \
      EXECUTIONS_DATA_SAVE_ON_ERROR="all" \
      EXECUTIONS_DATA_SAVE_ON_PROGRESS="false" \
      N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE="true" \
+     DB_SQLITE_POOL_SIZE="10" \
+     N8N_BLOCK_ENV_ACCESS_IN_NODE="false" \
+     N8N_GIT_NODE_DISABLE_BARE_REPOS="true" \
+     N8N_PROXY_HOPS="1" \
      --app $APP_NAME
    ```
 
