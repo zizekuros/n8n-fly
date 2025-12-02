@@ -56,9 +56,9 @@ This repository contains configuration for deploying n8n workflow automation too
 
 3. **Create Volume**
    
-   Create a single volume with 1GB size.
+   Create a single volume with 2GB size.
    ```bash
-   fly volumes create n8n_data --size 1 --region fra --app $APP_NAME
+   fly volumes create n8n_data --size 2 --region fra --app $APP_NAME
    ```
 
 4. **Set Up Encryption Key**
